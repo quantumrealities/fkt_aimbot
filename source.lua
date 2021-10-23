@@ -17,6 +17,13 @@ local DefaultOptions = {}
 local UserOptions = {}
 
 local CharacterEvents = {}
+----// Announcements Screen
+local AnnouncementsGui = Instance.new('ScreenGui', game:GetService('CoreGui'))
+local AnnouncementsFrame = Instance.new('Frame', AnnouncementsGui)
+local AnnouncementsConstraint = Instance.new('UIAspectRatioConstraint')
+local AnnouncementsTitle = Instance.new('TextLabel', AnnouncementsFrame)
+local AnnouncementsText = Instance.new('TextLabel', AnnouncementsFrame)
+local AnnouncementsClose = Instance.new('ImageButton', AnnouncementsFrame)
 ----// Debug Screen
 local DebugGui = Instance.new('ScreenGui', game:GetService('CoreGui'))
 local DebugFrame = Instance.new('Frame', DebugGui)
@@ -68,6 +75,48 @@ local function output(output, r, g, b)
 	else
 		print(output)
 	end	
+end
+----
+if pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/quantumrealities/fkt_aimbot/main/version.lua'))() end) then
+	if announcements and announcements ~= ''  then
+		AnnouncementsGui.Name = "announcements"
+
+		AnnouncementsFrame.Size = UDim2.new(0.15, 0, 0.177, 0)
+		AnnouncementsFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+		AnnouncementsFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+		AnnouncementsFrame.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+		AnnouncementsFrame.BorderSizePixel = 0
+
+		AnnouncementsTitle.Size = UDim2.new(1, 0, 0.15, 0)
+		AnnouncementsTitle.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+		AnnouncementsTitle.Text = 'Announcements'
+		AnnouncementsTitle.TextColor3 = Color3.fromRGB(158, 158, 158)
+		AnnouncementsTitle.TextScaled = true
+		AnnouncementsTitle.BorderSizePixel = 0
+		AnnouncementsTitle.Font = Enum.Font.GothamSemibold
+
+		AnnouncementsText.Size = UDim2.new(1, 0, 0.85, 0)
+		AnnouncementsText.Text = announcements
+		AnnouncementsText.TextColor3 = Color3.fromRGB(158, 158, 158)
+		AnnouncementsText.TextScaled = true
+		AnnouncementsText.BorderSizePixel = 0
+		AnnouncementsText.BackgroundTransparency = 1
+		AnnouncementsText.Position = UDim2.new(0, 0, 0.15, 0)
+		AnnouncementsText.Font = Enum.Font.GothamSemibold
+
+		AnnouncementsClose.AnchorPoint = Vector2.new(1, 0)
+		AnnouncementsClose.BackgroundTransparency = 1
+		AnnouncementsClose.Size = UDim2.new(0.073, 0, 0.15, 0)
+		AnnouncementsClose.Image = 'http://www.roblox.com/asset/?id=6031094678'
+		AnnouncementsClose.Position = UDim2.new(1, 0, 0, 0)
+		AnnouncementsClose.ZIndex = 2
+
+		AnnouncementsClose.MouseButton1Up:Connect(function()
+			wait()
+			AnnouncementsGui.Enabled = false
+			AnnouncementsGui:Destroy()
+		end)
+	end
 end
 ----
 DebugGui.Enabled = false
